@@ -337,4 +337,5 @@ octave-workspace
 .ico
 
 Images/
-Log/
+Log/*.log 
+Log/*.txt
