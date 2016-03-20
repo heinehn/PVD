@@ -1,16 +1,18 @@
 # -*- coding: utf-8 -*-
 from pylab import*
-from scipy.integrate import quad
 import numpy as np
 import os
 import re
+
 dir = os.getcwd()
-os.chdir(dir + "/Log")
+#os.chdir(dir + "/Log")
+
 #fileNumberFromUser = input("Type file number (S2P1-Al_Oflow_#): ")
 #fileName = "S2P1-Al_Oflow_" + str(fileNumberFromUser)
-print "**********************\n"
+print "***********************\n"
 print "Angstrom super plotter\n"
-print "**********************"
+print "***********************\n"
+print "Enter filname with .log"
 
 def removeFileExtension(filename):
 	return re.sub(r"\.[a-zA-Z]+$", "" ,filename)
@@ -20,6 +22,7 @@ fileNameFromUser = raw_input("File name: ")
 fileName = fileNameFromUser
 
 my_path = os.path.abspath(dir)
+logPath = dir + "/Log"
 imagePath = dir + "/Images"
 epsImagePath = imagePath + "/eps/" 
 pngImagePath = imagePath + "/png/"
@@ -39,6 +42,7 @@ except:
 	os.mkdir(pngImagePath)
 
 #Create sensor data from log directory
+os.chdir(logPath)
 inputSensor_1 = np.loadtxt(fileName  , delimiter = ',', dtype = 'float', skiprows = 6, usecols = (12,13,14))
 inputSensor_2 = np.loadtxt(fileName  , delimiter = ',', dtype = 'float', skiprows = 6, usecols = (15,16,17))
 inputSensor_3 = np.loadtxt(fileName  , delimiter = ',', dtype = 'float', skiprows = 6, usecols = (18,19,20))
