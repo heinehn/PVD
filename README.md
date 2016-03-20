@@ -22,4 +22,9 @@ Run the following command in terminal.
 
 ```sh
 $ python PVD.py
+```  
+Then enter filename with file extension  
+example:
+```sh
+$ sample.log
 ```
