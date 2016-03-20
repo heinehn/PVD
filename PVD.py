@@ -68,8 +68,8 @@ legend(loc='smart')
 #x1,x2,y1,y2 = -2,1,10**(-9),10**(-2)
 #ax.set_xlim(x1,x2)
 #ax.set_ylim(y1,y2)
-fig1.savefig(epsImagePath + removeFileExtension(fileName) + '_Freq' ,bbox_inches='tight', format = "eps")
-fig1.savefig(pngImagePath + removeFileExtension(fileName) + '_Freq' ,bbox_inches='tight', format = "png")
+fig1.savefig(epsImagePath + removeFileExtension(fileName) + '_Frequency' ,bbox_inches='tight', format = "eps")
+fig1.savefig(pngImagePath + removeFileExtension(fileName) + '_Frequency' ,bbox_inches='tight', format = "png")
 
 
 #Figure 2 - Rate vs Time
@@ -89,8 +89,8 @@ title( r'Deposition rate vs time: ' + fileName )
 bx.legend(loc='smart')
 bx.set_ylim(-0.1,)
 bx2.set_ylim(0,50)
-fig2.savefig(epsImagePath + removeFileExtension(fileName) + '_Freq' ,bbox_inches='tight', format = "eps")
-fig2.savefig(pngImagePath + removeFileExtension(fileName) + '_Freq' ,bbox_inches='tight', format = "png")
+fig2.savefig(epsImagePath + removeFileExtension(fileName) + '_Rate' ,bbox_inches='tight', format = "eps")
+fig2.savefig(pngImagePath + removeFileExtension(fileName) + '_Rate' ,bbox_inches='tight', format = "png")
 
 
 #Figure 3 - Thickness vs Time
@@ -105,6 +105,6 @@ xlabel(r'Process time,[s]', size = 20,labelpad= 5 )
 ylabel(r'Thickness, [$nm$]',size = 20, labelpad = 5)
 title( r'Film thickness vs time: ' + fileName )
 legend(loc='smart')
-fig3.savefig(my_path + "/Images/eps/" + removeFileExtension(fileName) + '_Thick' ,bbox_inches='tight', format = "eps")
-fig3.savefig(my_path + "/Images/png/" + removeFileExtension(fileName) + '_Thick' ,bbox_inches='tight', format = "png")
+fig3.savefig(epsImagePath + removeFileExtension(fileName) + '_Thickness' ,bbox_inches='tight', format = "eps")
+fig3.savefig(pngImagePath + removeFileExtension(fileName) + '_Thickness' ,bbox_inches='tight', format = "png")
 show()
