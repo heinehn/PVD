@@ -3,6 +3,7 @@ from pylab import*
 from scipy.integrate import quad
 import numpy as np
 import os
+import re
 dir = os.getcwd()
 os.chdir(dir + "/Log")
 #fileNumberFromUser = input("Type file number (S2P1-Al_Oflow_#): ")
@@ -11,31 +12,38 @@ print "**********************\n"
 print "Angstrom super plotter\n"
 print "**********************"
 
+def removeFileExtension(filename):
+	return re.sub(r"\.[a-zA-Z]+$", "" ,filename)
+
 #Finding directory of .py-file
 fileNameFromUser = raw_input("File name: ")
 fileName = fileNameFromUser
 
+my_path = os.path.abspath(dir)
+imagePath = dir + "/Images"
+epsImagePath = imagePath + "/eps/" 
+pngImagePath = imagePath + "/png/"
+
 #Creating Image, eps and png folders
 try:
-    os.stat(dir + "/Images")
+    os.stat(imagePath)
 except:
-	os.mkdir(dir + "/Images")
+	os.mkdir(imagePath)
 try:
-	os.stat(dir +"/Images/eps")
+	os.stat(epsImagePath)
 except:
-	os.mkdir(dir +"/Images/eps")
+	os.mkdir(epsImagePath)
 try:
-    os.stat(dir +"/Images/png")
+    os.stat(pngImagePath)
 except:
-	os.mkdir(dir +"/Images/png")
+	os.mkdir(pngImagePath)
 
 #Create sensor data from log directory
-inputSensor_1 = np.loadtxt(fileName + ".log", delimiter = ',', dtype = 'float', skiprows = 6, usecols = (12,13,14))
-inputSensor_2 = np.loadtxt(fileName + ".log", delimiter = ',', dtype = 'float', skiprows = 6, usecols = (15,16,17))
-inputSensor_3 = np.loadtxt(fileName + ".log", delimiter = ',', dtype = 'float', skiprows = 6, usecols = (18,19,20))
-inputSensor_4 = np.loadtxt(fileName + ".log", delimiter = ',', dtype = 'float', skiprows = 6, usecols = (21,22,23))
-inputOutput_1 = np.loadtxt(fileName + ".log", delimiter = ',', dtype = 'float', skiprows = 6, usecols = (7,8,9,10))
-
+inputSensor_1 = np.loadtxt(fileName  , delimiter = ',', dtype = 'float', skiprows = 6, usecols = (12,13,14))
+inputSensor_2 = np.loadtxt(fileName  , delimiter = ',', dtype = 'float', skiprows = 6, usecols = (15,16,17))
+inputSensor_3 = np.loadtxt(fileName  , delimiter = ',', dtype = 'float', skiprows = 6, usecols = (18,19,20))
+inputSensor_4 = np.loadtxt(fileName  , delimiter = ',', dtype = 'float', skiprows = 6, usecols = (21,22,23))
+inputOutput_1 = np.loadtxt(fileName  , delimiter = ',', dtype = 'float', skiprows = 6, usecols = (7,8,9,10))
 
 
 #Create process time
@@ -43,8 +51,6 @@ time = []
 for i in range(0,len(inputSensor_2)):
 	x = i
 	time.append(x)
-
-my_path = os.path.abspath(dir)
 
 #Figure 1 - Frequency vs Time
 fig1 = figure()
@@ -62,8 +68,8 @@ legend(loc='smart')
 #x1,x2,y1,y2 = -2,1,10**(-9),10**(-2)
 #ax.set_xlim(x1,x2)
 #ax.set_ylim(y1,y2)
-fig1.savefig(my_path + "/Images/eps/" + fileName + '_Freq' ,bbox_inches='tight', format = "eps")
-fig1.savefig(my_path + "/Images/png/" + fileName + '_Freq' ,bbox_inches='tight', format = "png")
+fig1.savefig(epsImagePath + removeFileExtension(fileName) + '_Freq' ,bbox_inches='tight', format = "eps")
+fig1.savefig(pngImagePath + removeFileExtension(fileName) + '_Freq' ,bbox_inches='tight', format = "png")
 
 
 #Figure 2 - Rate vs Time
@@ -83,8 +89,8 @@ title( r'Deposition rate vs time: ' + fileName )
 bx.legend(loc='smart')
 bx.set_ylim(-0.1,)
 bx2.set_ylim(0,50)
-fig2.savefig(my_path + "/Images/eps/" + fileName + '_Rate' ,bbox_inches='tight', format = "eps")
-fig2.savefig(my_path + "/Images/png/" + fileName + '_Rate' ,bbox_inches='tight', format = "png")
+fig2.savefig(epsImagePath + removeFileExtension(fileName) + '_Freq' ,bbox_inches='tight', format = "eps")
+fig2.savefig(pngImagePath + removeFileExtension(fileName) + '_Freq' ,bbox_inches='tight', format = "png")
 
 
 #Figure 3 - Thickness vs Time
@@ -99,6 +105,6 @@ xlabel(r'Process time,[s]', size = 20,labelpad= 5 )
 ylabel(r'Thickness, [$nm$]',size = 20, labelpad = 5)
 title( r'Film thickness vs time: ' + fileName )
 legend(loc='smart')
-fig3.savefig(my_path + "/Images/eps/" + fileName + '_Thick' ,bbox_inches='tight', format = "eps")
-fig3.savefig(my_path + "/Images/png/" + fileName + '_Thick' ,bbox_inches='tight', format = "png")
+fig3.savefig(my_path + "/Images/eps/" + removeFileExtension(fileName) + '_Thick' ,bbox_inches='tight', format = "eps")
+fig3.savefig(my_path + "/Images/png/" + removeFileExtension(fileName) + '_Thick' ,bbox_inches='tight', format = "png")
 show()
