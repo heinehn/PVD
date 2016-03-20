@@ -339,3 +339,4 @@ octave-workspace
 Images/
 Log/*.log 
 Log/*.txt
+!Log/sample.log
