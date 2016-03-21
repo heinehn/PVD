@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from pylab import*
+from pylab import *
 import numpy as np
 import os
 import re
