@@ -4,34 +4,21 @@ import numpy as np
 import os
 import re
 
-
-
-#my_path = os.path.abspath(r"C:\Users\Heine\Desktop\Div\Python\Vegarl_log")
-my_path = os.getcwd()
-
-print 'd',my_path
-#os.chdir('my_path' + "/Log")
-
-
-#fileNumberFromUser = input("Type file number (S2P1-Al_Oflow_#): ")
-#fileName = "S2P1-Al_Oflow_" + str(fileNumberFromUser)
-
 #Intro tekst:
 print "***********************\n"
 print "Angstrom super plotter\n"
 print "***********************\n"
 print "Enter full filname"
 
+
 def removeFileExtension(filename):
 	return re.sub(r"\.[a-zA-Z]+$", "" ,filename)
 
-#Finding directory of .py-file
-fileName = raw_input("File name: ")
-#fileNameFromUser = 'sample.txt'
-#fileName = fileNameFromUser
 
-#my_path = os.path.abspath(Dir)
-#logPath = r"C:\Users\Heine\Desktop\Div\Python\Vegarl_log\Log"
+#Finding directory of .py-file
+my_path = os.getcwd()
+fileName = raw_input("File name: ")
+file_path = my_path + os.path.sep + "Log"
 
 logPath = my_path + os.path.sep + "Log"
 imagePath = my_path + os.path.sep + "Images"
@@ -55,7 +42,7 @@ except:
 	os.makedirs(pngImagePath)
 
 #Create sensor data from log directory
-os.chdir(my_path)
+os.chdir(file_path)
 inputSensor_1 = np.loadtxt(fileName  , delimiter = ',', dtype = 'float', skiprows = 6, usecols = (12,13,14))
 inputSensor_2 = np.loadtxt(fileName  , delimiter = ',', dtype = 'float', skiprows = 6, usecols = (15,16,17))
 inputSensor_3 = np.loadtxt(fileName  , delimiter = ',', dtype = 'float', skiprows = 6, usecols = (18,19,20))
